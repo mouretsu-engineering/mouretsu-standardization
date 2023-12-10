@@ -1,0 +1,2 @@
+# mouretsu-standardization
+テンプレートリポジトリ
