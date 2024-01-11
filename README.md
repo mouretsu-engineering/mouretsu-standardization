@@ -12,6 +12,9 @@
 * backend側でrailsの環境構築
 * docker compose up -d --build
 
+ローカルでactionlintを実行する
+docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest
+
 【参考記事】
 * https://qiita.com/shinKoala99/items/5c1f21996b7f3980cc06
 * https://qiita.com/itachi/items/05fbe67c7168703a34e7
