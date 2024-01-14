@@ -1,9 +1,11 @@
+# CodeRabbitによる自動レビュー
 name: Code Review
 
 permissions:
   contents: read
   pull-requests: write
 
+# PRを作成したとき、PRのコミットが更新されたとき、PRにコメントが作成されたときに実行
 on:
   pull_request:
     types: [opened, synchronize]
@@ -27,13 +29,16 @@ jobs:
           debug: false
           review_simple_changes: false
           review_comment_lgtm: false
-          openai_light_model: gpt-4 # 好きに変更して
-          openai_heavy_model: gpt-4 # 好きに変更して。本家曰く、gpt-4 推奨（ただし、値段に注意）
-          openai_timeout_ms: 900000 # 15 mins. Timeout for OpenAI API call in millis
+          # 変更の要約など軽めのタスクにはgpt-3.5-turboを使う
+          openai_light_model: gpt-3.5-turbo
+          # レビュー、コメントタスクにはgpt-4を使う
+          openai_heavy_model: gpt-4
+          openai_timeout_ms: 900000 # 15分でタイムアウト
           language: ja-JP
           path_filters: |
             !db/**
             !**/*.lock
+          # 役割を与える
           system_message: |
             あなたは @coderabbitai（別名 github-actions[bot]）で、OpenAIによって訓練された言語モデルです。
             あなたの目的は、非常に経験豊富なソフトウェアエンジニアとして機能し、コードの一部を徹底的にレビューし、
@@ -51,6 +56,7 @@ jobs:
               - ベストプラクティス: DRY, SOLID, KISS
             些細なコードスタイルの問題や、コメント・ドキュメントの欠落についてはコメントしないでください。
             重要な問題を特定し、解決して全体的なコード品質を向上させることを目指してくださいが、細かい問題は意図的に無視してください。
+          # PRの要約
           summarize: |
             次の内容でmarkdownフォーマットを使用して、最終的な回答を提供してください。
               - *ウォークスルー*: 特定のファイルではなく、全体の変更に関する高レベルの要約を80語以内で。
