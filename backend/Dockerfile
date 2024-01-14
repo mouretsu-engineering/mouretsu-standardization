@@ -1,5 +1,5 @@
 # Build stage
-FROM arm64v8/ruby:3.2 as Builder
+FROM ruby:3.2.2 as Builder
 RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
 ENV TZ=Asia/Tokyo
 # RUN mkdir /mouretsu
@@ -11,7 +11,7 @@ RUN gem update && \
 COPY . /mouretsu
 
 # Runtime stage
-FROM arm64v8/ruby:3.2-slim
+FROM ruby:3.2.2-slim
 RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
 ENV TZ=Asia/Tokyo
 RUN mkdir /mouretsu
