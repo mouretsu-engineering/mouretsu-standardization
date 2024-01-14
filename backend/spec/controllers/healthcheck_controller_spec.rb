@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "HealthCheck", type: :request do
+RSpec.describe HealthcheckController, type: :controller do
   describe "GET /index" do
     before do
       Timecop.freeze(Time.zone.local(2023, 1, 1, 12, 0, 0))
@@ -20,6 +20,7 @@ RSpec.describe "HealthCheck", type: :request do
       json_response = JSON.parse(response.body)
       current_time = Time.now.to_i
       returned_time = json_response['time']
+
       expect(returned_time).to eq(current_time)
     end
   end
