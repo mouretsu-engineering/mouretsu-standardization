@@ -24,6 +24,12 @@ services:
       dockerfile: Dockerfile
     command: rails server -b 0.0.0.0
     image: mouretsu_backend_image
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_HOST: ${MYSQL_HOST}
     container_name: mouretsu_backend
     volumes:
       - ./backend:/mouretsu
