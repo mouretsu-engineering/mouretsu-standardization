@@ -9,7 +9,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_HOST: ${MYSQL_HOST}
     command: --default-authentication-plugin=mysql_native_password
     container_name: mouretsu_db
     ports:
@@ -24,6 +23,12 @@ services:
       dockerfile: Dockerfile
     command: rails server -b 0.0.0.0
     image: mouretsu_backend_image
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_HOST: ${MYSQL_HOST} # Docker Compose内のdatabaseの項のservices名を使用
     container_name: mouretsu_backend
     volumes:
       - ./backend:/mouretsu
@@ -31,11 +36,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   frontend:
     build:
