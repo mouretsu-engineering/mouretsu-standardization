@@ -9,7 +9,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_HOST: ${MYSQL_HOST}
     command: --default-authentication-plugin=mysql_native_password
     container_name: mouretsu_db
     ports:
@@ -29,7 +28,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_HOST: ${MYSQL_HOST} # Docker Compose内のdatabaseの項のservices名を使用
     container_name: mouretsu_backend
     volumes:
       - ./backend:/mouretsu
