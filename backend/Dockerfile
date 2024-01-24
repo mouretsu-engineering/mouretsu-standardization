@@ -1,6 +1,6 @@
 # Build stage
 FROM ruby:3.2.2 as Builder
-RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client build-essential libssl-dev
 ENV TZ=Asia/Tokyo
 # RUN mkdir /mouretsu
 WORKDIR /mouretsu
@@ -12,7 +12,7 @@ COPY . /mouretsu
 
 # Runtime stage
 FROM ruby:3.2.2-slim
-RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client build-essential libssl-dev
 ENV TZ=Asia/Tokyo
 RUN mkdir /mouretsu
 WORKDIR /mouretsu

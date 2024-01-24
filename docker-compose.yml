@@ -29,6 +29,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_HOST: ${MYSQL_HOST} # Docker Compose内のdatabaseの項のservices名を使用
+      MYSQL_DEV_DATABASE: ${MYSQL_DEV_DATABASE}
     container_name: mouretsu_backend
     volumes:
       - ./backend:/mouretsu
